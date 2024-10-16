@@ -27,7 +27,7 @@ _rotation = _rotation.to(device)
 _opacity = _opacity.to(device)
 _feature = _feature.to(device)
 
-background = torch.ones(3, device=device)
+background = torch.zeros(3, device=device)
 
 img_H = 256
 img_W = 256
