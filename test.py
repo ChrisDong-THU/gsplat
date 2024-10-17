@@ -19,7 +19,7 @@ _xy = torch.tensor([[0.0, 0.0]]).tile(num_points, 1)
 _scaling = torch.tensor([[1.0, 1.0]]).tile(num_points, 1)
 _rotation = torch.tensor([[0.0]]).tile(num_points, 1)
 _opacity = torch.tensor([[1.0]]).tile(num_points, 1)
-_feature = torch.tensor([[1.0, 1.0, 1.0]]).tile(num_points, 1)
+_feature = torch.tensor([[1.0, 1.0, 1.0, 1.0]]).tile(num_points, 1)
 
 _xy = _xy.to(device)
 _scaling = _scaling.to(device)
@@ -27,7 +27,7 @@ _rotation = _rotation.to(device)
 _opacity = _opacity.to(device)
 _feature = _feature.to(device)
 
-background = torch.zeros(3, device=device)
+background = torch.zeros(4, device=device)
 
 img_H = 256
 img_W = 256
