@@ -16,10 +16,10 @@ num_points = 1000
 # _feature = torch.ones((num_points, 3))
 
 _xy = torch.tensor([[0.0, 0.0]]).tile(num_points, 1)
-_scaling = torch.tensor([[1.0, 1.0]]).tile(num_points, 1)
+_scaling = torch.tensor([[16., 16.]]).tile(num_points, 1)
 _rotation = torch.tensor([[0.0]]).tile(num_points, 1)
 _opacity = torch.tensor([[1.0]]).tile(num_points, 1)
-_feature = torch.tensor([[1.0, 1.0, 1.0, 1.0]]).tile(num_points, 1)
+_feature = torch.tensor([[1.0, 1.0, 1.0]]).tile(num_points, 1)
 
 _xy = _xy.to(device)
 _scaling = _scaling.to(device)
@@ -27,7 +27,7 @@ _rotation = _rotation.to(device)
 _opacity = _opacity.to(device)
 _feature = _feature.to(device)
 
-background = torch.zeros(4, device=device)
+background = torch.zeros(_feature.shape[-1], device=device)
 
 img_H = 256
 img_W = 256
@@ -42,7 +42,7 @@ tile_bounds = (
 xys, depths, radii, conics, num_tiles_hit = project_gaussians_2d_scale_rot(_xy, _scaling, _rotation, img_H, img_W, tile_bounds)
 out_img = rasterize_gaussians_sum(xys, depths, radii, conics, num_tiles_hit, _feature, _opacity, img_H, img_W, block_H, block_W, background=background, return_alpha=False)
 
-out_img = out_img.clamp(0, 1)
+# out_img = out_img.clamp(0, 1)
 
 out_img_np = out_img.cpu().numpy()
 
